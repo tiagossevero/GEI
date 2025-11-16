@@ -1,0 +1,333 @@
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                    PROJETO GEI - MONITORAMENTO FISCAL v3.0                     ║
+║                    Receita Estadual de Santa Catarina                          ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ 1. PROPÓSITO CENTRAL                                                          ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+Identificar automaticamente grupos econômicos (múltiplas empresas relacionadas)
+e analisar indicadores de risco fiscal através de:
+
+  ✓ Machine Learning (K-Means, DBSCAN, Isolation Forest)
+  ✓ Análise de confusão patrimonial
+  ✓ Análise de anomalias (CCS, padrões coordenados)
+  ✓ Análise fiscal multidimensional (9 dimensões)
+  ✓ Detecção de planejamento tributário abusivo
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ 2. ARQUIVOS E TAMANHOS                                                        ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+📊 GEI.py                              318 KB  | Dashboard Streamlit (6900+ linhas)
+📓 GEI Cálculo (1).ipynb               82 KB   | Cálculo de métricas (PySpark)
+📓 GEI Cálculo-Exemplo (2).ipynb       68 KB   | Exemplo simplificado
+📓 GEIC.ipynb                          2.1 MB  | Análise consolidada (16 análises)
+📓 GEIC-exemplo (5).ipynb              13 KB   | Exemplo GEIC
+📓 GEIG.ipynb                          412 KB  | Análise global
+💾 GEI.json                            566 KB  | Configuração
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ 3. PRINCIPAIS FUNCIONALIDADES DO DASHBOARD (GEI.py)                           ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+🤖 MACHINE LEARNING (Linha 534-1400)
+   └─ K-Means:          Clustering em 2-5 clusters
+   └─ DBSCAN:           Detecção de outliers (ajustável)
+   └─ Isolation Forest:  Detecção de anomalias
+   └─ Modo Consenso:    Executa 3 simultaneamente
+   └─ PCA:              Redução de dimensionalidade
+   └─ Métricas:         Silhouette, Davies-Bouldin, Calinski-Harabasz
+
+📊 DASHBOARD EXECUTIVO (Linha 4655)
+   └─ KPIs: Total grupos, receita, risco
+   └─ Gráficos de distribuição
+   └─ Top 30 grupos de risco
+
+🔍 ANÁLISE PONTUAL (Linha 2726)
+   └─ Busca por CNPJ ou grupo
+   └─ Análise similaridade (7 dimensões)
+   └─ Relatório PDF automatizado
+
+📋 10 MENUS TEMÁTICOS
+   ├─ Contadores (linha 5124)
+   ├─ Meios de Pagamento (linha 5226)
+   ├─ Funcionários - RAIS/CAGED (linha 5290)
+   ├─ Convênio 115 (linha 5372)
+   ├─ Contas Bancárias Compartilhadas (linha 5445)
+   ├─ Análise Financeira (linha 5621)
+   ├─ Inconsistências NFe (linha 5745)
+   ├─ Indícios Fiscais (linha 5972)
+   ├─ Vínculos Societários (linha 6001)
+   └─ Dossiê Completo (linha 6049)
+
+⚙️ FUNÇÕES AUXILIARES
+   └─ Filtros dinâmicos, formatação, cache, geração PDF
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ 4. TECNOLOGIAS UTILIZADAS                                                     ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+Backend & Framework
+  • Streamlit - Interface web interativa
+  • Python 3.x - Linguagem principal
+
+Processamento de Dados
+  • Pandas - Manipulação de dados tabulares
+  • NumPy - Computação numérica
+  • PySpark - Processamento big data distribuído
+
+Machine Learning
+  • scikit-learn
+    ├─ KMeans, DBSCAN
+    ├─ IsolationForest
+    ├─ PCA (redução dimensionalidade)
+    ├─ StandardScaler (normalização)
+    └─ Métricas (silhouette, davies_bouldin, calinski_harabasz)
+
+Visualização
+  • Plotly Express (px) - Gráficos de alto nível
+  • Plotly Graph Objects (go) - Customização
+  • Plotly Subplots - Múltiplos gráficos
+
+Banco de Dados
+  • Impala (bdaworkernode02.sef.sc.gov.br:21050)
+  • SQLAlchemy - ORM e gerenciamento conexões
+  • Autenticação LDAP com SSL/TLS
+
+Relatórios
+  • ReportLab - Geração de PDFs
+
+Outros
+  • SciPy - Estatística
+  • OpenPyXL - Excel
+  • Hashlib - Criptografia
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ 5. REQUISITOS ESPECIAIS                                                       ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+Infraestrutura
+  Server Impala: bdaworkernode02.sef.sc.gov.br:21050
+  Database: gessimples
+  Auth: LDAP + SSL/TLS
+
+Configuração
+  .streamlit/secrets.toml:
+    [impala_credentials]
+    user = "usuario_ldap"
+    password = "senha_ldap"
+
+Tabelas de Dados Esperadas (17+)
+  • gei_percent - Dados principais consolidados
+  • gei_cnpj, gei_cadastro, gei_contador
+  • gei_socios_compartilhados
+  • gei_c115_ranking_risco_grupo_economico
+  • gei_funcionarios_metricas_grupo
+  • gei_pagamentos_metricas_grupo
+  • gei_c115_metricas_grupos, gei_ccs_metricas_grupo
+  • gei_ccs_ranking_risco
+  • gei_indicios, gei_nfe_completo
+  • gei_ccs_cpf_compartilhado
+  • gei_ccs_sobreposicao_responsaveis
+  • gei_ccs_padroes_coordenados
+  • Plus: usr_sat_ods.vw_ods_contrib
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ 6. NOTEBOOKS - PROCESSAMENTO BIG DATA                                         ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+GEI Cálculo (1).ipynb
+  Objetivo: Consolidação e cálculo de métricas
+  Processamentos:
+    1. Carregamento de CNPJs (API)
+    2. Criação view NFe otimizada
+    3. Integração CFOP
+    4. Cálculo de ICMS
+    5. Processamento CTe
+    6. Carregamento PGDAS-D
+    7. Consolidação notificações
+    8. Visualizações e análises
+    9. Exportação em padrão ouro
+  Tecnologia: PySpark + Spark SQL
+
+GEIC.ipynb
+  Objetivo: Análise consolidada abrangente
+  16+ análises:
+    1. Panorama geral
+    2. Ranking Top 30
+    3. Análise contadores
+    4. Inconsistências operacionais
+    5. Confusão patrimonial
+    6. Análise temporal
+    7. Análise setorial
+    8. Indícios fiscais
+    9. Estrutura societária
+    10. Convênio 115
+    11. Faturamento vs funcionários
+    12. Análise comparativa multi-dimensional
+    13. Dossiê de grupo
+    14. Dashboard executivo
+    15. Rede societária
+    16. Sumário executivo
+  Tamanho: 2.1 MB
+
+GEIG.ipynb
+  Objetivo: Análise global agregada
+  Focos: Panorama, riscos, CNAE, tendências
+  Tamanho: 412 KB
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ 7. TIPOS DE ANÁLISES REALIZADAS                                               ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+FISCAIS
+  • Indícios Fiscais (10 tipos)
+  • Inconsistências NFe
+  • Confusão Patrimonial
+  • Planejamento Tributário Abusivo
+  • Limite Simples Nacional
+
+CLUSTERING/AGRUPAMENTO
+  • K-Means: Agrupamento por perfil risco
+  • DBSCAN: Outliers
+  • Isolation Forest: Anomalias
+  • Consenso: Validação cruzada 3 algoritmos
+
+ANOMALIAS
+  • CCS: Contas bancárias compartilhadas
+  • Sobreposições: Responsáveis sobrepostos
+  • Padrões Coordenados: Aberturas/encerramentos
+  • Receita/Funcionários: Desproporções
+
+RISCO
+  • Score Customizado (9 dimensões)
+  • Nível Risco C115
+  • Índice Risco CCS
+  • Ranking Risco
+
+SETORIAIS
+  • Distribuição por CNAE
+  • Risco médio por setor
+  • Comparativas
+
+VÍNCULOS
+  • Estrutura societária
+  • Grau interconexão
+  • Rede relacionamentos
+  • Contador associado
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ 8. FLUXO DE DADOS                                                             ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+Impala BD
+(bdaworkernode02:21050)
+    |
+    | PySpark + SQL
+    v
+Notebooks (Cálculo, GEIC, GEIG)
+Consolidação de métricas
+    |
+    v
+Tabelas consolidadas (gei_*)
+    |
+    v
+GEI.py - Streamlit Dashboard
+├─ Cache (TTL 1h/5min)
+├─ Análises em tempo real
+├─ Visualizações Plotly
+├─ Relatórios PDF
+└─ Interface: 11 páginas + ML
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ 9. SCORE ML CUSTOMIZADO (9 DIMENSÕES)                                         ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+Dimensão                    Pontos   Indicadores
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. Cadastro                  10     Razão social, fantasia, CNAE, contador, endereço
+2. Sócios                    8      Compartilhamento, interconexão
+3. Financeiro                7      Limite SN, receita
+4. Convênio 115              5      Índice, nível risco
+5. Indícios                  5      Quantidade, tipos
+6. CCS                       5      Contas, sobreposições
+7. NFe                       5      Inconsistências (cliente, email, tel, IP)
+8. Pagamentos                3      A sócios
+9. Funcionários              2      Receita/funcionário
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Total Máximo                 50     Percentual: 0-100%
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ 10. NÍVEIS DE RISCO (C115)                                                    ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+🔴 CRÍTICO   (3) - Risco máximo, investigação urgente
+🟠 ALTO      (2) - Risco elevado, necessário monitoramento
+🟡 MÉDIO     (1) - Risco moderado, análise recomendada
+🟢 BAIXO     (0) - Risco baixo, operação normal
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ 11. PERFORMANCE E OTIMIZAÇÕES                                                 ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+Caching
+  • Dados principais: TTL 3600s (1 hora)
+  • Dossiês: TTL 300s (5 minutos)
+  • Decoradores: @st.cache_resource, @st.cache_data
+
+Query Optimization
+  • LIMIT em queries (50k-10k registros)
+  • Índices esperados em BD
+  • PySpark para big data
+
+Renderização
+  • Gráficos Plotly interativos
+  • DataFrames pagináveis
+  • Expanders para detalhes
+
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ 12. CASOS DE USO                                                              ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+AUDITOR FISCAL
+  1. Acessa Dashboard Executivo
+  2. Analisa Top 30 grupos
+  3. Clica em grupo de interesse
+  4. Visualiza Dossiê completo
+  5. Exporta PDF
+
+GERENTE DE RECEITA
+  1. Monitora KPIs principais
+  2. Analisa distribuição risco
+  3. Consulta ranking por CNAE
+  4. Acompanha tendências
+
+DATA ANALYST
+  1. Executa análise pontual
+  2. Investiga padrões
+  3. Realiza análise ML
+  4. Compara consenso algoritmos
+
+
+╔════════════════════════════════════════════════════════════════════════════════╗
+║ RESUMO: Sistema sofisticado de inteligência fiscal combinando Big Data,       ║
+║ Machine Learning, Análise Estatística, Visualização e Relatórios.             ║
+║ Objetivo: Identificar grupos econômicos clandestinos e risco fiscal.           ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+Versão: GEI v3.0
+Data: 2025-11-16
+Tecnologias: Streamlit, PySpark, scikit-learn, Plotly, Impala
